@@ -8,7 +8,7 @@ from math import min
 alias nelts = simdwidthof[DType.float32]() * 2
 
 fn reduce_add[dtype: DType, width: Int](vec: SIMD[dtype, width]) -> Int:
-    """Manually implement reduce_add for SIMD vectors"""
+    """Manually implement reduce_add for SIMD vectors."""
     var total = 0
     for i in range(width):
         total += vec[i]
@@ -25,7 +25,7 @@ struct SIMDScriptBoundary:
         self.name = name
     
     fn contains_simd[width: Int](self, code_points: SIMD[DType.int32, width]) -> SIMD[DType.bool, width]:
-        """Vectorized boundary check using SIMD"""
+        """Vectorized boundary check using SIMD."""
         return (code_points >= self.start) & (code_points <= self.end)
 
 struct ScriptAnalysisResult:
@@ -79,7 +79,7 @@ struct SIMDScriptDetector:
         self.latin_boundary = SIMDScriptBoundary(0x0000, 0x007F, "Latin")
     
     fn detect_script_simd(self, text: String) -> ScriptAnalysisResult:
-        """Perform SIMD-accelerated script detection"""
+        """Perform SIMD-accelerated script detection."""
         var result = ScriptAnalysisResult()
         
         # Convert text to SIMD-friendly code points
@@ -108,7 +108,7 @@ struct SIMDScriptDetector:
         return result
     
     fn _text_to_simd_points(self, text: String) -> DynamicVector[Int32]:
-        """Convert text to a vector of code points for SIMD processing"""
+        """Convert text to a vector of code points for SIMD processing."""
         var code_points = DynamicVector[Int32]()
         for i in range(len(text)):
             code_points.push_back(ord(text[i]))
